@@ -1,0 +1,247 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    background-image: url("../paper-bg.jpg");
+}
+
+section {
+    max-width: 1100px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+header {
+    padding: 10px 0 20px;
+    background-color: white;
+    opacity: 0.5;
+
+    section {
+        border: 3px solid #888;
+        border-radius: 15px;
+        padding: 20px;
+        background: url("../delta.png") no-repeat;
+
+        h2 {
+            margin-left: 220px;
+        }
+    }
+}
+
+
+main {
+    margin: 80px 0;
+
+    section {
+        border: 5px dashed #374273;
+        border-radius: 15px;
+        padding: 30px 40px 50px;
+    }
+}
+
+.formula-form {
+    input {
+        width: 400px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        padding: 7px;
+        margin: 0 auto;
+        font-size: 1.1em;
+        display: block;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    button {
+        display: block;
+        margin: 15px auto 0;
+
+        background-color: rgba(255, 148, 2, 1);
+        border: 2px solid rgba(221, 119, 0, 1);
+        border-radius: 3px;
+        padding: 5px 20px;
+        font-size: 1.3em;
+        outline: none;
+        opacity: 0.9;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+        &:active {
+            opacity: 1.0;
+        }
+    }
+}
+
+
+footer {
+    width: 100%;
+    opacity: 0.9;
+
+    .small {
+        display: block;
+        width: 100%;
+        background-color: #1b1c56;
+        color: white;
+        padding: 10px 0;
+        box-sizing: border-box;
+        opacity: 0.7;
+    }
+
+    .strong {
+        display: block;
+        width: 100%;
+        background-color: #0e131c;
+        color: #777;
+        padding: 15px 0;
+        box-sizing: border-box;
+        font-size: .8em;
+        line-height: 29px;
+    }
+}
+
+div.author {
+    float: left;
+}
+
+div.logo {
+    background-image: url("../small-logo.png");
+    width: 77px;
+    height: 29px;
+    float: left;
+    margin: 0 30px;
+}
+
+ul.menu {
+    float: right;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+
+    li {
+        float: left;
+        margin-right: 14px;
+    }
+}
+
+div.examples {
+
+    margin-bottom: 35px;
+
+    &.invisible {
+        opacity: 0;
+    }
+
+    p {
+        font-size: 1.4em;
+        margin: 0 20px 0 0;
+        float: left;
+    }
+
+    ul {
+        padding-left: 0;
+        margin: 0;
+        list-style: none;
+
+        li {
+            margin-top: 5px;
+            margin-right: 5px;
+            float: left;
+
+            a.example {
+                color: #3a70ff;
+                font-size: 1.2em;
+                background-color: white;
+                cursor: pointer;
+                padding: 4px 8px;
+                border-radius: 5px;
+                -webkit-box-shadow: 0 0 5px #3a70ff;
+                -webkit-transition: -webkit-box-shadow .3s;
+                &:hover {
+                  -webkit-box-shadow: 0 0 11px #3a70ff;
+                }
+            }
+        }
+    }
+
+}
+
+#info {
+    display: none;
+
+
+    &.visible {
+        display: block;
+    }
+
+    .equation-info {
+        margin-top: 30px;
+
+        &.invisible {
+            opacity: 0;
+        }
+
+        .data {
+            background-color: white;
+            border: 1px solid #aaa;
+            box-shadow: 3px 3px 5px #999;
+            padding: 11px 20px;
+            margin: 0 5px 5px 0;
+
+            p {
+                margin: 0 0 .5em;
+            }
+
+            &.data-exponents,
+            &.data-zeros {
+                width:300px;
+            }
+
+            canvas#graph-canvas {
+                width: 450px;
+                height: 240px;
+            }
+        }
+    }
+
+
+}
+
+
+ul.exponents {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+ul.exponents li {
+    float: left;
+}
+
+
+ul.solutions {
+    list-style: none;
+    margin: 0;
+    padding-left: 20px;
+}
+
+ul.boxed li {
+    background-color: orange;
+    border-radius: 4px;
+    padding: 3px 13px;
+    margin-right: 20px;
+    margin-bottom: 3px;
+}
+
+.row .column {
+    float: left;
+}
+
+.clear:after,
+.row:after {
+    content: '';
+    display: block;
+    clear: both;
+}

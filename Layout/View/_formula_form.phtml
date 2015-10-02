@@ -1,0 +1,128 @@
+<div class="formula-form">
+    <div class="examples clear">
+        <p>Try one of the examples:</p>
+        <ul>
+            <li><a class="example">3x^2 - 4x - 6</a></li>
+            <li><a class="example">x^2 + 3</a></li>
+            <li><a class="example">x^2 - 20</a></li>
+            <li><a class="example">2x^2 + 4x + 2</a></li>
+        </ul>
+    </div>
+
+    <h2>Type your expression</h2>
+    <input id="formula" class="stand-out" placeholder="2x^2 - x + 14 = 0"/>
+    <button id="solve">Solve</button>
+
+    <div  id="info">
+        <div class="equation-info">
+            <div class="row">
+                <div class="column">
+                    <div class="data data-exponents">
+                        <h3>Coefficients of equation</h3>
+                        <ul id="exponents" class="exponents boxed clear">
+                        </ul>
+                    </div>
+                    <div class="data data-zeros">
+                        <h3>Roots of equation</h3>
+                        <ul id="solutions" class="solutions boxed clear">
+                        </ul>
+                    </div>
+                </div>
+                <div class="data data-graph column">
+                    <canvas id="graph-canvas" width="450" height="240">
+                        Your browser doesn't support canvas tag :/
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+echo $this->addFile("js", "js/Math.js");
+echo $this->addFile("js", "js/String.js");
+echo $this->addFile("js", "js/Utils.js");
+echo $this->addFile("js", "js/Solver.js");
+echo $this->addFile("js", "js/ReadableSolver.js");
+echo $this->addFile("js", "js/Parser.js");
+echo $this->addFile("js", "js/Function.js");
+echo $this->addFile("js", "js/Drawer.js");
+echo $this->addFile("js", "js/UnresolvedSqrt.js");
+?>
+<script>
+    function byId(id) {
+        var element = document.getElementById(id);
+        if (element)
+            return element;
+        throw new Error("No element with such id \"" + id + "\"");
+    }
+    function byClass(className) {
+        return document.getElementsByClassName(className);
+    }
+
+    var exponentsList = byId("exponents");
+    var solutionsList = byId("solutions");
+    var solveButton = byId("solve");
+    var equationField = byId("formula");
+
+    var examples = byClass("example");
+
+    var drawer = new Drawer();
+    drawer.useCanvas("graph-canvas");
+
+    function parseAndDisplay(expression) {
+        var func = new Parser(expression).parse();
+        var roots = func.getRoot();
+
+        displayElementsInList(func.asArray(), exponentsList, "exponent");
+        displayElementsInList(roots, solutionsList, "solution");
+        if (roots.length === 0) {
+            solutionsList.innerHTML = 'This formula has no zeros';
+        }
+
+        drawer.draw(func);
+        byId("info").className = "visible";
+    }
+    function displayElementsInList(elements, list, className) {
+
+        list.innerHTML = "";
+
+        for (var i = 0; i < elements.length; i++) {
+            var domElement = toListDomElement(elements[i], className);
+            list.appendChild(domElement);
+        }
+    }
+    function toListDomElement(element, className) {
+        var listElement = document.createElement("li");
+        listElement.className = className;
+        listElement.innerHTML = element;
+        return listElement;
+    }
+
+    solveButton.addEventListener("click", function () {
+        parseAndDisplay(equationField.value);
+    }, false);
+
+
+    for (var i = 0; i < examples.length; i++) {
+        var example = examples[i];
+        example.addEventListener("click", function () {
+            equationField.value = this.innerHTML;
+            parseAndDisplay(this.innerHTML);
+        }, false);
+    }
+
+    function testParser() {
+        var parser = new Parser();
+        console.log(parser.parse("4          "));
+        console.log(parser.parse("x+3        "));
+        console.log(parser.parse("32x-4      "));
+        console.log(parser.parse("x^2        "));
+        console.log(parser.parse("x^2+x      "));
+        console.log(parser.parse("x^2+x-24   "));
+        console.log(parser.parse("x^2+43     "));
+        console.log(parser.parse("33x^2-x    "));
+        console.log(parser.parse("33x^2+34   "));
+        console.log(parser.parse("32x^2+32x+4"));
+    }
+
+</script>
