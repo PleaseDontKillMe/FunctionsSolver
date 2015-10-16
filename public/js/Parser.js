@@ -24,16 +24,16 @@ function Parser(expr) {
     }
 
     function interpretSign(sign) {
-        if (isUndefined(sign)) return 1;
-        if (sign.empty()) return 1;
-        if (sign == "+") return 1;
-        if (sign == "-") return -1;
+        if (isUndefined(sign)) return 1; // if no number
+        if (sign.isEmpty()) return 1;      // if no sign
+        if (sign == "+") return 1;       // if sign is +
+        if (sign == "-") return -1;      // if sign is -
         throw new Error("Expression doesn't match the pattern");
     }
 
     function interpretValue(value) {
-        if (isUndefined(value)) return 0;
-        if (value.empty()) return 1;
+        if (isUndefined(value)) return 0;  // if no coefficent
+        if (value.isEmpty()) return 1;       // if no number with coefficient
         return parseFloat(value);
     }
 }

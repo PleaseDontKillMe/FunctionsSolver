@@ -74,10 +74,9 @@ function Drawer() {
 
 
         var tickWidth = 3;
-        var distanceBetween = 20/scale;
-        var inc = scale * distanceBetween;
+        var inc = 20;
 
-        console.log(scale + "/" + distanceBetween + " = " + inc);
+       // console.log(scale + "/" + 20/scale + " = " + inc);
         for (var i = 0; i < center.x*2; i += inc)
         {
             move(offset.x + i, offset.y - tickWidth);
@@ -95,10 +94,6 @@ function Drawer() {
             move(offset.x + tickWidth, offset.y + j);
             line(offset.x - tickWidth, offset.y + j);
         }
-
-        var scaleIndicator = Math.ceil(distanceBetween);
-        ctx.fillText("" + scaleIndicator, offset.x + 10, offset.y+14);
-        ctx.fillText("-" + scaleIndicator, offset.x - 30, offset.y+14);
 
         ctx.stroke();
     }

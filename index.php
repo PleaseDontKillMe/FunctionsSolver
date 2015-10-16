@@ -12,13 +12,16 @@ $pageName = strtolower($pageName);
 $modelViewMap = [
     "home" => "_formula_page.phtml",
     "about" => "_about_delta_page.phtml",
-    "calc" => "_calc_delta.phtml"
+    "author" => "_author.phtml",
+    "default" => "_404.phtml"
 ];
 
-$view = new View();
-$pageFileName = array_key_exists($pageName, $modelViewMap)
-    ? $modelViewMap[$pageName] : "_404.phtml";
+$pageName = array_key_exists($pageName, $modelViewMap) ? $pageName : "default";
 
+$pageFileName = $modelViewMap[$pageName];
+
+
+$view = new View();
 $view->render($pageFileName, [
     "title" => "Function Solver"
 ]);

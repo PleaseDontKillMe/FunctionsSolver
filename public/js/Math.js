@@ -2,8 +2,10 @@
 Math.gcd = gcd;
 
 function gcd() {
-    if (arguments.length == 0) return null;
-    if (arguments.length == 1) return arguments[0];
+    if (arguments.length == 0)
+        throw new Error("No arguments for GCD");
+    if (arguments.length == 1)
+        return arguments[0];
     return multipleGcd(arguments);
 }
 
@@ -17,8 +19,10 @@ function multipleGcd(array)
 }
 
 function generalGcd(a, b) {
+
     if (a < 0 && b < 0)
         return -this.positiveGcd(-a, -b);
+
 
     return this.positiveGcd(Math.abs(a), Math.abs(b));
 }

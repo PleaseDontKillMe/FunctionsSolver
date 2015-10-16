@@ -28,6 +28,7 @@ ReadableSolver.prototype.getRoot = function (delta)
     if (delta.isWholeNumber())
         return this.solver.getRoot(delta.factor);
 
+    // simplify factor
     var gcd = Math.gcd(this.b, delta.factor, denominator);
     delta.factor /= gcd;
     denominator /= gcd;
