@@ -18,21 +18,26 @@ class View
         echo "\n";
     }
 
-    public function addFile($fileType, $fileName) {
+    public function addFile($fileType, $fileName)
+    {
         switch ($fileType) {
-            case "css": return $this->addCssFile($fileName);
-            case "js": return $this->addJsFile($fileName);
+            case "css":
+                return $this->addCssFile($fileName);
+            case "js":
+                return $this->addJsFile($fileName);
             default:
                 throw new InvalidArgumentException("Unknown filetype");
         }
     }
 
-    protected function addJsFile($filename) {
+    protected function addJsFile($filename)
+    {
         $filename = "public/$filename";
         return "<script type=\"text/javascript\" src=\"$filename\"></script>\n";
     }
 
-    protected function addCssFile($filename) {
+    protected function addCssFile($filename)
+    {
         $filename = "public/$filename";
         return "<link rel=\"stylesheet\" type=\"text/css\" href=\"$filename\" />\n";
     }
