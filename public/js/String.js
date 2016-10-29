@@ -6,6 +6,6 @@ String.prototype.eraseSpaces = function () {
     return this.replace(/ /g, "");
 };
 
-String.prototype.first = function() {
+String.prototype.first = function () {
     return this[0] || null;
 };

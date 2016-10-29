@@ -1,4 +1,3 @@
-
 function Solver(func) {
     this.a = func.a;
     this.b = func.b;
@@ -7,11 +6,13 @@ function Solver(func) {
 }
 
 Solver.prototype.solve = function () {
-    if (this.delta < 0)
+    if (this.delta < 0) {
         return [];
+    }
 
-    if (this.delta == 0)
+    if (this.delta == 0) {
         return [this.getRoot(0)];
+    }
 
     return [
         this.getRoot(-Math.sqrt(this.delta)),

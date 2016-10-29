@@ -1,6 +1,4 @@
-
-function UnresolvedSqrt(factor, sqrt, base)
-{
+function UnresolvedSqrt(factor, sqrt, base) {
     this.factor = factor;
     this.sqrt = sqrt;
     this.base = base;
@@ -17,37 +15,37 @@ UnresolvedSqrt.from = function (given) {
     throw new Error("Unsupported variable type");
 };
 
-UnresolvedSqrt.solve = function(original) {
-
+UnresolvedSqrt.solve = function (original) {
     var squaredNumber = Math.sqrt(original);
 
-    if (isInt(squaredNumber))
+    if (isInt(squaredNumber)) {
         return new UnresolvedSqrt(squaredNumber, 1, original);
+    }
 
-    for (var i = original; i > 1; i--)
-    {
-        var squaredDivider = Math.sqrt(i),
-            rest = original/i;
+    for (var i = original; i > 1; i--) {
+        var squaredDivider = Math.sqrt(i);
+        var rest = original / i;
 
-        if (isInt(squaredDivider) && isInt(rest))
+        if (isInt(squaredDivider) && isInt(rest)) {
             return new UnresolvedSqrt(squaredDivider, rest, original);
+        }
     }
 
     return new UnresolvedSqrt(1, original, original);
 };
 
 
-UnresolvedSqrt.prototype.toString = function(omitSign) {
+UnresolvedSqrt.prototype.toString = function (omitSign) {
     if (this.isWholeNumber()) {
         return this.signedFactor();
     }
     if (this.isSingle()) {
-        return (omitSign ? "":this.sign()+" ") + "&radic;" + this.sqrt;
+        return (omitSign ? "" : this.sign() + " ") + "&radic;" + this.sqrt;
     }
     return this.signedFactor(omitSign) + "&radic;" + this.sqrt;
 };
 
-UnresolvedSqrt.prototype.negate = function() {
+UnresolvedSqrt.prototype.negate = function () {
     var copy = this.copy();
     copy.factor *= -1;
     return copy;

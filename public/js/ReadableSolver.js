@@ -8,11 +8,13 @@ function ReadableSolver(func) {
 }
 
 ReadableSolver.prototype.solve = function () {
-    if (this.delta < 0)
+    if (this.delta < 0) {
         return [];
+    }
 
-    if (this.delta == 0)
+    if (this.delta == 0) {
         return [this.solver.getRoot(0)];
+    }
 
     var squaredDelta = UnresolvedSqrt.from(this.delta);
     return [
@@ -21,12 +23,12 @@ ReadableSolver.prototype.solve = function () {
     ];
 };
 
-ReadableSolver.prototype.getRoot = function (delta)
-{
-    var denominator = 2*this.a;
+ReadableSolver.prototype.getRoot = function (delta) {
+    var denominator = 2 * this.a;
 
-    if (delta.isWholeNumber())
+    if (delta.isWholeNumber()) {
         return this.solver.getRoot(delta.factor);
+    }
 
     // simplify factor
     var gcd = Math.gcd(this.b, delta.factor, denominator);
@@ -40,8 +42,9 @@ ReadableSolver.prototype.getRoot = function (delta)
         counter = (-this.b / gcd) + " " + delta.toString();
     }
 
-    if (denominator == 1)
+    if (denominator == 1) {
         return counter;
+    }
 
-    return "(" + counter + ") / "  + denominator;
+    return "(" + counter + ") / " + denominator;
 };

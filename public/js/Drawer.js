@@ -1,6 +1,4 @@
-
 function Drawer() {
-
     this.draw = drawGraphAndAxes;
     this.useCanvas = useCanvas;
 
@@ -8,10 +6,10 @@ function Drawer() {
         offset = {x: 0, y: 0},
         scale,  // number of pixels from x=0 to x=1
         showAxis = true,
-        center = {x: 0, y:0},
+        center = {x: 0, y: 0},
         canvas = null,
         ctx = null
-    ;
+        ;
 
     function useCanvas(canvasId) {
         canvas = document.getElementById(canvasId);
@@ -22,7 +20,6 @@ function Drawer() {
     }
 
     function drawGraphAndAxes(func) {
-
         clearCanvas();
         autoAdjustScale(func);
         showAxis && drawAxes();
@@ -30,27 +27,25 @@ function Drawer() {
     }
 
     function clearCanvas() {
-
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
     function autoAdjustScale(func) {
-
-        var q = -func.b/(2*func.a),
-            p = func.valueOf(q);
-
+        var q = -func.b / (2 * func.a);
+        var p = func.valueOf(q);
         var length = new Vector(q, p).length();
 
-        scale =  80/length;
+        scale = 80 / length;
     }
-
 
     function move(x, y) {
         ctx.moveTo(x, y);
     }
+
     function line(x, y) {
-        ctx.lineTo(x , y);
+        ctx.lineTo(x, y);
     }
+
     function drawAxes() {
         var arrowLength = 7;
 
@@ -60,25 +55,23 @@ function Drawer() {
         move(0, offset.y);
         line(canvas.width, offset.y);  // X axis
         move(offset.x, 0);
-        line(offset.x, canvas.height );  // Y axis
+        line(offset.x, canvas.height);  // Y axis
 
         // draw up headed arrow
-        move(offset.x - arrowLength,  arrowLength);
+        move(offset.x - arrowLength, arrowLength);
         line(offset.x, 0);
-        line(offset.x + arrowLength,  arrowLength);
+        line(offset.x + arrowLength, arrowLength);
 
         // draw right headed arrow
         move(canvas.width - arrowLength, offset.y - arrowLength);
         line(canvas.width, offset.y);
         line(canvas.width - arrowLength, offset.y + arrowLength);
 
-
         var tickWidth = 3;
         var inc = 20;
 
-       // console.log(scale + "/" + 20/scale + " = " + inc);
-        for (var i = 0; i < center.x*2; i += inc)
-        {
+        // console.log(scale + "/" + 20/scale + " = " + inc);
+        for (var i = 0; i < center.x * 2; i += inc) {
             move(offset.x + i, offset.y - tickWidth);
             line(offset.x + i, offset.y + tickWidth);
 
@@ -86,8 +79,7 @@ function Drawer() {
             line(offset.x - i, offset.y + tickWidth);
         }
 
-        for (var j = 0; j < center.y*2 - scale; j += inc)
-        {
+        for (var j = 0; j < center.y * 2 - scale; j += inc) {
             move(offset.x + tickWidth, offset.y - j);
             line(offset.x - tickWidth, offset.y - j);
 
@@ -121,5 +113,4 @@ function Drawer() {
         }
         ctx.stroke();
     }
-
 }

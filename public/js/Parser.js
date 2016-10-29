@@ -1,11 +1,9 @@
-
 function Parser(expr) {
     this.expr = expr.eraseSpaces();
 
     var pattern = /^(?:(\+|\-)?([\d\.]*)x\^2)?(?:(\+|\-)?([\d\.]*)x)?(?:(\+|\-)?([\d\.]+))?$/;
 
-    this.parse = function ()
-    {
+    this.parse = function () {
         var matches = pattern.exec(this.expr);
 
         if (!matches) {
@@ -24,16 +22,20 @@ function Parser(expr) {
     }
 
     function interpretSign(sign) {
-        if (isUndefined(sign)) return 1; // if no number
-        if (sign.isEmpty()) return 1;      // if no sign
-        if (sign == "+") return 1;       // if sign is +
-        if (sign == "-") return -1;      // if sign is -
+        if (isUndefined(sign)) return 1;
+        if (sign.isEmpty()) return 1;
+        if (sign == "+") return 1;
+        if (sign == "-") return -1;
         throw new Error("Expression doesn't match the pattern");
     }
 
     function interpretValue(value) {
-        if (isUndefined(value)) return 0;  // if no coefficent
-        if (value.isEmpty()) return 1;       // if no number with coefficient
+        if (isUndefined(value)) {
+            return 0;
+        }
+        if (value.isEmpty()) {
+            return 1;
+        }
         return parseFloat(value);
     }
 }

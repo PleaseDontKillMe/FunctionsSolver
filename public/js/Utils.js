@@ -1,9 +1,8 @@
-
 isFunction = function (object) {
     return typeof object === "function";
 };
 
-isUndefined = function(object) {
+isUndefined = function (object) {
     return typeof object === "undefined";
 };
 
@@ -33,6 +32,6 @@ Array.prototype.contains = function (element) {
     return this.indexOf(element) != -1;
 };
 
-Number.prototype.asSigned = function() {
+Number.prototype.asSigned = function () {
     return (this < 0) ? this.toString() : ("+" + this);
 };
